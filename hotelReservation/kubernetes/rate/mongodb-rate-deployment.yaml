@@ -26,6 +26,9 @@ spec:
       labels:
         io.kompose.service: mongodb-rate
     spec:
+      nodeSelector:
+        continuum-role: cloud
+
       containers:
         - image: mongo:4.4.6
           name: hotel-reserv-rate-mongo

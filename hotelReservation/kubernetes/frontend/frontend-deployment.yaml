@@ -25,11 +25,15 @@ spec:
       labels:
         io.kompose.service: frontend
     spec:
+      nodeSelector:
+        continuum-role: edge
+        kubernetes.io/arch: arm64      
       containers:
         - command:
             - frontend
-          image: deathstarbench/hotel-reservation:latest
+          image: migvasc/hotel-frontend:arm64
           name: hotel-reserv-frontend
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 5000
           resources:

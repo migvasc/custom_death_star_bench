@@ -25,11 +25,15 @@ spec:
       labels:
         io.kompose.service: search
     spec:
+      nodeSelector:
+        continuum-role: edge
+        kubernetes.io/arch: arm64      
       containers:
         - command:
             - search
-          image: deathstarbench/hotel-reservation:latest
+          image: migvasc/hotel-search:arm64
           name: hotel-reserv-search
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8082
           resources:

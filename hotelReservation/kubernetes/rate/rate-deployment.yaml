@@ -25,11 +25,15 @@ spec:
       labels:
         io.kompose.service: rate
     spec:
+      nodeSelector:
+        continuum-role: edge
+        kubernetes.io/arch: arm64      
       containers:
         - command:
             - rate
-          image: deathstarbench/hotel-reservation:latest
+          image: migvasc/hotel-rate:arm64
           name: hotel-reserv-rate
+          imagePullPolicy: IfNotPresent    
           ports:
             - containerPort: 8084
           resources:

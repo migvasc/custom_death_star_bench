@@ -24,12 +24,16 @@ spec:
       creationTimestamp: null
       labels:
         io.kompose.service: recommendation
-    spec:
+    spec:    
+      nodeSelector:
+        continuum-role: edge
+        kubernetes.io/arch: arm64      
       containers:
         - command:
             - recommendation
-          image: deathstarbench/hotel-reservation:latest
+          image: migvasc/hotel-recommendation:arm64
           name: hotel-reserv-recommendation
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8085
           resources:

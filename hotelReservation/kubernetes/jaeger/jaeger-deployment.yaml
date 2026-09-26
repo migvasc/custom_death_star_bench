@@ -25,6 +25,9 @@ spec:
       labels:
         io.kompose.service: jaeger
     spec:
+      nodeSelector:
+        continuum-role: cloud
+
       containers:
         - image: jaegertracing/all-in-one:1.62.0
           name: hotel-reserv-jaeger

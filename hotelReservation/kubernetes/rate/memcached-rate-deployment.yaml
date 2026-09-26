@@ -25,6 +25,9 @@ spec:
       labels:
         io.kompose.service: memcached-rate
     spec:
+      nodeSelector:
+        continuum-role: cloud
+
       containers:
         - env:
             - name: MEMCACHED_CACHE_SIZE

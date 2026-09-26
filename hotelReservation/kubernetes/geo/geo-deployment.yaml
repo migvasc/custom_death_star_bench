@@ -24,11 +24,15 @@ spec:
       creationTimestamp: null
       labels:
         io.kompose.service: geo
-    spec:
+    spec:    
+      nodeSelector:
+        continuum-role: edge
+        kubernetes.io/arch: arm64
       containers:
         - command:
             - geo
-          image: deathstarbench/hotel-reservation:latest
+          image: migvasc/hotel-geo:arm64
+          imagePullPolicy: IfNotPresent
           name: hotel-reserv-geo
           ports:
             - containerPort: 8083

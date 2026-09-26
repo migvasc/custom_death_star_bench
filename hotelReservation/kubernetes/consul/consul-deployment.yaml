@@ -25,6 +25,8 @@ spec:
       labels:
         io.kompose.service: consul
     spec:
+      nodeSelector:
+        continuum-role: cloud
       containers:
         - image: hashicorp/consul:latest
           name: consul

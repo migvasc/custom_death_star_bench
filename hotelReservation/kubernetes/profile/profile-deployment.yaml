@@ -25,11 +25,15 @@ spec:
       labels:
         io.kompose.service: profile
     spec:
+      nodeSelector:
+        continuum-role: edge
+        kubernetes.io/arch: arm64      
       containers:
         - command:
             - profile
-          image: deathstarbench/hotel-reservation:latest
+          image: migvasc/hotel-profile:arm64
           name: hotel-reserv-profile
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8081
           resources:

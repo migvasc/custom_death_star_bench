@@ -1,0 +1,44 @@
+# syntax=docker/dockerfile:1
+
+FROM --platform=$BUILDPLATFORM golang:1.21 AS builder
+
+ARG SERVICE
+ARG TARGETOS
+ARG TARGETARCH
+
+WORKDIR /workspace
+
+COPY go.sum go.sum
+COPY go.mod go.mod
+COPY vendor/ vendor/
+
+COPY cmd/ cmd/
+COPY dialer/ dialer/
+COPY registry/ registry/
+COPY services/ services/
+COPY tls/ tls/
+COPY tracing/ tracing/
+COPY tune/ tune/
+
+COPY config.json config.json
+
+RUN test -n "${SERVICE}"
+
+RUN CGO_ENABLED=0 \
+    GOOS="${TARGETOS}" \
+    GOARCH="${TARGETARCH}" \
+    GO111MODULE=on \
+    go build \
+      -mod=vendor \
+      -ldflags="-s -w" \
+      -o /out/service \
+      "./cmd/${SERVICE}"
+
+FROM scratch
+
+WORKDIR /workspace
+
+COPY --from=builder /out/service /workspace/service
+COPY config.json /workspace/config.json
+
+ENTRYPOINT ["/workspace/service"]
