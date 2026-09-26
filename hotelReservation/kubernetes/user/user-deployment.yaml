@@ -29,9 +29,7 @@ spec:
         continuum-role: edge
         kubernetes.io/arch: arm64      
       containers:
-        - command:
-            - user
-          image: migvasc/hotel-user:arm64
+        - image: migvasc/hotel-user:arm64
           name: hotel-reserv-user
           imagePullPolicy: IfNotPresent
           ports:

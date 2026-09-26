@@ -29,9 +29,7 @@ spec:
         continuum-role: edge
         kubernetes.io/arch: arm64      
       containers:
-        - command:
-            - rate
-          image: migvasc/hotel-rate:arm64
+        - image: migvasc/hotel-rate:arm64
           name: hotel-reserv-rate
           imagePullPolicy: IfNotPresent    
           ports:

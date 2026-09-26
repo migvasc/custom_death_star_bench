@@ -29,9 +29,7 @@ spec:
         continuum-role: edge
         kubernetes.io/arch: arm64      
       containers:
-        - command:
-            - search
-          image: migvasc/hotel-search:arm64
+        - image: migvasc/hotel-search:arm64
           name: hotel-reserv-search
           imagePullPolicy: IfNotPresent
           ports:
